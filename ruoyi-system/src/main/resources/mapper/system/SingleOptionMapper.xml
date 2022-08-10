@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SingleOptionMapper">
+    
+    <resultMap type="SingleOption" id="SingleOptionResult">
+        <result property="id"    column="id"    />
+        <result property="questionContent"    column="question_content"    />
+        <result property="questionAnswer"    column="question_answer"    />
+        <result property="questionType"    column="question_type"    />
+        <result property="questionClass"    column="question_class"    />
+        <result property="questionAnalysis"    column="question_analysis"    />
+        <result property="questionA"    column="question_a"    />
+        <result property="questionB"    column="question_b"    />
+        <result property="questionC"    column="question_c"    />
+        <result property="questionD"    column="question_d"    />
+    </resultMap>
+
+    <sql id="selectSingleOptionVo">
+        select id, question_content, question_answer, question_type, question_class, question_analysis, question_a, question_b, question_c, question_d from single_option
+    </sql>
+
+    <select id="selectSingleOptionList" parameterType="SingleOption" resultMap="SingleOptionResult">
+        <include refid="selectSingleOptionVo"/>
+        <where>  
+            <if test="questionContent != null  and questionContent != ''"> and question_content = #{questionContent}</if>
+            <if test="questionAnswer != null  and questionAnswer != ''"> and question_answer = #{questionAnswer}</if>
+            <if test="questionType != null  and questionType != ''"> and question_type = #{questionType}</if>
+            <if test="questionClass != null  and questionClass != ''"> and question_class = #{questionClass}</if>
+            <if test="questionAnalysis != null  and questionAnalysis != ''"> and question_analysis = #{questionAnalysis}</if>
+            <if test="questionA != null  and questionA != ''"> and question_a = #{questionA}</if>
+            <if test="questionB != null  and questionB != ''"> and question_b = #{questionB}</if>
+            <if test="questionC != null  and questionC != ''"> and question_c = #{questionC}</if>
+            <if test="questionD != null  and questionD != ''"> and question_d = #{questionD}</if>
+        </where>
+    </select>
+    
+    <select id="selectSingleOptionById" parameterType="Long" resultMap="SingleOptionResult">
+        <include refid="selectSingleOptionVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSingleOption" parameterType="SingleOption" useGeneratedKeys="true" keyProperty="id">
+        insert into single_option
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="questionContent != null">question_content,</if>
+            <if test="questionAnswer != null">question_answer,</if>
+            <if test="questionType != null">question_type,</if>
+            <if test="questionClass != null">question_class,</if>
+            <if test="questionAnalysis != null">question_analysis,</if>
+            <if test="questionA != null">question_a,</if>
+            <if test="questionB != null">question_b,</if>
+            <if test="questionC != null">question_c,</if>
+            <if test="questionD != null">question_d,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="questionContent != null">#{questionContent},</if>
+            <if test="questionAnswer != null">#{questionAnswer},</if>
+            <if test="questionType != null">#{questionType},</if>
+            <if test="questionClass != null">#{questionClass},</if>
+            <if test="questionAnalysis != null">#{questionAnalysis},</if>
+            <if test="questionA != null">#{questionA},</if>
+            <if test="questionB != null">#{questionB},</if>
+            <if test="questionC != null">#{questionC},</if>
+            <if test="questionD != null">#{questionD},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSingleOption" parameterType="SingleOption">
+        update single_option
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="questionContent != null">question_content = #{questionContent},</if>
+            <if test="questionAnswer != null">question_answer = #{questionAnswer},</if>
+            <if test="questionType != null">question_type = #{questionType},</if>
+            <if test="questionClass != null">question_class = #{questionClass},</if>
+            <if test="questionAnalysis != null">question_analysis = #{questionAnalysis},</if>
+            <if test="questionA != null">question_a = #{questionA},</if>
+            <if test="questionB != null">question_b = #{questionB},</if>
+            <if test="questionC != null">question_c = #{questionC},</if>
+            <if test="questionD != null">question_d = #{questionD},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteSingleOptionById" parameterType="Long">
+        delete from single_option where id = #{id}
+    </delete>
+
+    <delete id="deleteSingleOptionByIds" parameterType="String">
+        delete from single_option where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

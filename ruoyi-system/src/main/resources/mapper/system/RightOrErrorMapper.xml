@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.RightOrErrorMapper">
+    
+    <resultMap type="RightOrError" id="RightOrErrorResult">
+        <result property="id"    column="id"    />
+        <result property="questionContent"    column="question_content"    />
+        <result property="questionAnswer"    column="question_answer"    />
+        <result property="questionType"    column="question_type"    />
+        <result property="questionClass"    column="question_class"    />
+        <result property="questionAnalysis"    column="question_analysis"    />
+    </resultMap>
+
+    <sql id="selectRightOrErrorVo">
+        select id, question_content, question_answer, question_type, question_class, question_analysis from right_or_error
+    </sql>
+
+    <select id="selectRightOrErrorList" parameterType="RightOrError" resultMap="RightOrErrorResult">
+        <include refid="selectRightOrErrorVo"/>
+        <where>  
+            <if test="questionContent != null  and questionContent != ''"> and question_content = #{questionContent}</if>
+            <if test="questionAnswer != null  and questionAnswer != ''"> and question_answer = #{questionAnswer}</if>
+            <if test="questionType != null  and questionType != ''"> and question_type = #{questionType}</if>
+            <if test="questionClass != null  and questionClass != ''"> and question_class = #{questionClass}</if>
+            <if test="questionAnalysis != null  and questionAnalysis != ''"> and question_analysis = #{questionAnalysis}</if>
+        </where>
+    </select>
+    
+    <select id="selectRightOrErrorById" parameterType="Long" resultMap="RightOrErrorResult">
+        <include refid="selectRightOrErrorVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertRightOrError" parameterType="RightOrError" useGeneratedKeys="true" keyProperty="id">
+        insert into right_or_error
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="questionContent != null">question_content,</if>
+            <if test="questionAnswer != null">question_answer,</if>
+            <if test="questionType != null">question_type,</if>
+            <if test="questionClass != null">question_class,</if>
+            <if test="questionAnalysis != null">question_analysis,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="questionContent != null">#{questionContent},</if>
+            <if test="questionAnswer != null">#{questionAnswer},</if>
+            <if test="questionType != null">#{questionType},</if>
+            <if test="questionClass != null">#{questionClass},</if>
+            <if test="questionAnalysis != null">#{questionAnalysis},</if>
+         </trim>
+    </insert>
+
+    <update id="updateRightOrError" parameterType="RightOrError">
+        update right_or_error
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="questionContent != null">question_content = #{questionContent},</if>
+            <if test="questionAnswer != null">question_answer = #{questionAnswer},</if>
+            <if test="questionType != null">question_type = #{questionType},</if>
+            <if test="questionClass != null">question_class = #{questionClass},</if>
+            <if test="questionAnalysis != null">question_analysis = #{questionAnalysis},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteRightOrErrorById" parameterType="Long">
+        delete from right_or_error where id = #{id}
+    </delete>
+
+    <delete id="deleteRightOrErrorByIds" parameterType="String">
+        delete from right_or_error where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

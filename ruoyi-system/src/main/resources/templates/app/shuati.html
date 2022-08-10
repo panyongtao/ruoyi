@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <th:block th:include="include :: header('刷题')" />
+    <th:block th:include="include :: summernote-css" />
+    <th:block th:include="include :: footer" />
+</head>
+
+<body class="gray-bg">
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse">
+            <label class="col-sm-3 control-label">题的类型：</label>
+            <div class="col-sm-9">
+                <label class="check-box">
+                    <input type="checkbox" value="option1" id="inlineCheckbox1">单选题</label>
+                <label class="check-box">
+                    <input type="checkbox" value="option2" id="inlineCheckbox2">多选题</label>
+                <label class="check-box">
+                    <input type="checkbox" value="option3" id="inlineCheckbox3">判断题</label>
+            </div>
+            <div class="col-sm-6">
+                <button type="button" class="btn btn-primary">顺序刷题</button>
+                <button type="button" class="btn btn-primary">随机刷题</button>
+            </div>
+        </div>
+
+        <div class="col-sm-12 select-table table-striped">
+            <div class="col-sm-6 col-sm-offset-5">
+                <a class="btn btn-success" onclick="$.operate.add()">
+                    <i class="fa fa-plus"></i> 上一题
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()">
+                    <i class="fa fa-remove"></i> 下一题
+                </a>
+            </div>
+            <div class="col-sm-12">
+                <div class="col-sm-6">
+                    <label class="control-label" >对：8</label>
+                    <label class="control-label">错：4</label>
+                    <label class="control-label">正确率：45%</label>
+                    <label class="control-label">时间：2022：06：07</label>
+                </div>
+            </div>
+            <hr>
+        </div>
+
+    </div>
+</div>
+
+<script th:inline="javascript">
+
+</script>
+
+</body>
