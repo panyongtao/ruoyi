@@ -30,6 +30,14 @@ server:
       max: 800
       # Tomcat启动初始化的线程数，默认值10
       min-spare: 100
+#  设置使用https
+  ssl:
+    protocol: TLS
+    key-store: classpath:server.keystore
+    key-alias: tomcat
+    enabled: false
+    key-store-password: 123456
+    key-store-type: JKS
  
 # 日志配置
 logging:
